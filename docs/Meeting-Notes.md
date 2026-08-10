@@ -6,7 +6,7 @@
 
 **Date:** 13 April 2026
 
-**Attendees:**
+**Attendees:**![alt text](image.png)
 - Hellen
 
 ### Agenda
