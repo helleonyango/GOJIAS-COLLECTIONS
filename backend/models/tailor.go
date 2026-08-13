@@ -8,3 +8,10 @@ type Tailor struct {
     Portfolio   []string
     Rating      float64
 }
+func NewTailor(name string, phone string, email string) Tailor {
+    return Tailor{
+        Name:  name,
+        Phone: phone,
+        Email: email,
+    }
+}

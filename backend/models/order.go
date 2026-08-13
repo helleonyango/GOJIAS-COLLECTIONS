@@ -16,3 +16,14 @@ type Order struct {
     PlacedAt        time.Time
     ExpectedReady   time.Time
 }
+func NewOrder(customerID string, tailorID string, measurementID string, fabricChoice string, styleDescription string) Order {
+    return Order{
+        CustomerID:       customerID,
+        TailorID:         tailorID,
+        MeasurementID:    measurementID,
+        FabricChoice:     fabricChoice,
+        StyleDescription: styleDescription,
+        Status:           "requested",
+        PlacedAt:         time.Now(),
+    }
+}

@@ -14,3 +14,9 @@ type MeasurementProfile struct {
     OutfitLength float64
     LastUpdated  time.Time
 }
+func NewMeasurementProfile(customerID string, label string) MeasurementProfile {
+    return MeasurementProfile{
+        CustomerID: customerID,
+        Label:      label,
+    }
+}
