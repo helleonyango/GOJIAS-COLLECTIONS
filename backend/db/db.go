@@ -19,6 +19,7 @@ func InitDB(path string) (*sql.DB, error) {
 
     return database, nil
 }
+
 func CreateTables(database *sql.DB) error {
     tailorTable := `
     CREATE TABLE IF NOT EXISTS tailors (
@@ -32,6 +33,19 @@ func CreateTables(database *sql.DB) error {
     );`
 
     _, err := database.Exec(tailorTable)
+    if err != nil {
+        return err
+    }
+
+    customerTable := `
+    CREATE TABLE IF NOT EXISTS customers (
+        id TEXT PRIMARY KEY,
+        name TEXT NOT NULL,
+        email TEXT,
+        phone TEXT
+    );`
+
+    _, err = database.Exec(customerTable)
     if err != nil {
         return err
     }
