@@ -50,5 +50,24 @@ func CreateTables(database *sql.DB) error {
         return err
     }
 
+    measurementTable := `
+    CREATE TABLE IF NOT EXISTS measurement_profiles (
+        id TEXT PRIMARY KEY,
+        customer_id TEXT,
+        label TEXT,
+        bust REAL,
+        waist REAL,
+        hips REAL,
+        shoulder_width REAL,
+        sleeve_length REAL,
+        outfit_length REAL,
+        last_updated TEXT
+    );`
+
+    _, err = database.Exec(measurementTable)
+    if err != nil {
+        return err
+    }
+
     return nil
 }
