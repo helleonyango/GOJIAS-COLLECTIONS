@@ -69,5 +69,26 @@ func CreateTables(database *sql.DB) error {
         return err
     }
 
+    orderTable := `
+    CREATE TABLE IF NOT EXISTS orders (
+        id TEXT PRIMARY KEY,
+        customer_id TEXT,
+        tailor_id TEXT,
+        measurement_id TEXT,
+        fabric_choice TEXT,
+        style_description TEXT,
+        status TEXT,
+        price REAL,
+        deposit_paid INTEGER,
+        balance_paid INTEGER,
+        placed_at TEXT,
+        expected_ready TEXT
+    );`
+
+    _, err = database.Exec(orderTable)
+    if err != nil {
+        return err
+    }
+
     return nil
 }
