@@ -2,8 +2,11 @@ package db
 
 import (
     "database/sql"
+    "strings"
 
     _ "modernc.org/sqlite"
+
+    "github.com/helleonyango/GOJIAS-COLLECTIONS/backend/models"
 )
 
 func InitDB(path string) (*sql.DB, error) {
@@ -91,4 +94,22 @@ func CreateTables(database *sql.DB) error {
     }
 
     return nil
+}
+
+func InsertTailor(database *sql.DB, tailor models.Tailor) error {
+    query := `
+    INSERT INTO tailors (id, name, phone, email, specialties, portfolio, rating)
+    VALUES (?, ?, ?, ?, ?, ?, ?);`
+
+    _, err := database.Exec(query,
+        tailor.ID,
+        tailor.Name,
+        tailor.Phone,
+        tailor.Email,
+        strings.Join(tailor.Specialties, ","),
+        strings.Join(tailor.Portfolio, ","),
+        tailor.Rating,
+    )
+
+    return err
 }
