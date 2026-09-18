@@ -1,23 +1,29 @@
 package models
 
-import "time"
+import (
+    "time"
+
+    "github.com/google/uuid"
+)
 
 type Order struct {
-    ID              string
-    CustomerID      string
-    TailorID        string
-    MeasurementID   string
-    FabricChoice    string
+    ID               string
+    CustomerID       string
+    TailorID         string
+    MeasurementID    string
+    FabricChoice     string
     StyleDescription string
-    Status          string
-    Price           float64
-    DepositPaid     bool
-    BalancePaid     bool
-    PlacedAt        time.Time
-    ExpectedReady   time.Time
+    Status           string
+    Price            float64
+    DepositPaid      bool
+    BalancePaid      bool
+    PlacedAt         time.Time
+    ExpectedReady    time.Time
 }
+
 func NewOrder(customerID string, tailorID string, measurementID string, fabricChoice string, styleDescription string) Order {
     return Order{
+        ID:               uuid.New().String(),
         CustomerID:       customerID,
         TailorID:         tailorID,
         MeasurementID:    measurementID,
