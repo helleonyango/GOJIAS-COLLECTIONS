@@ -113,3 +113,17 @@ func InsertTailor(database *sql.DB, tailor models.Tailor) error {
 
     return err
 }
+func InsertCustomer(database *sql.DB, customer models.Customer) error {
+    query := `
+    INSERT INTO customers (id, name, email, phone)
+    VALUES (?, ?, ?, ?);`
+
+    _, err := database.Exec(query,
+        customer.ID,
+        customer.Name,
+        customer.Email,
+        customer.Phone,
+    )
+
+    return err
+}

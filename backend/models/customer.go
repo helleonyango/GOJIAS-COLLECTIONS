@@ -10,6 +10,7 @@ type Customer struct {
     MeasurementProfiles []MeasurementProfile
     OrderHistory        []Order
 }
+
 func NewCustomer(name string, email string, phone string) Customer {
     return Customer{
         ID:    uuid.New().String(),
