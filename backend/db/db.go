@@ -3,6 +3,7 @@ package db
 import (
     "database/sql"
     "strings"
+    "time"
 
     _ "modernc.org/sqlite"
 
@@ -123,6 +124,49 @@ func InsertCustomer(database *sql.DB, customer models.Customer) error {
         customer.Name,
         customer.Email,
         customer.Phone,
+    )
+
+    return err
+}
+func InsertMeasurementProfile(database *sql.DB, m models.MeasurementProfile) error {
+    query := `
+    INSERT INTO measurement_profiles (id, customer_id, label, bust, waist, hips, shoulder_width, sleeve_length, outfit_length, last_updated)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`
+
+    _, err := database.Exec(query,
+        m.ID,
+        m.CustomerID,
+        m.Label,
+        m.Bust,
+        m.Waist,
+        m.Hips,
+        m.ShoulderWidth,
+        m.SleeveLength,
+        m.OutfitLength,
+        m.LastUpdated.Format(time.RFC3339),
+    )
+
+    return err
+}
+
+func InsertOrder(database *sql.DB, order models.Order) error {
+    query := `
+    INSERT INTO orders (id, customer_id, tailor_id, measurement_id, fabric_choice, style_description, status, price, deposit_paid, balance_paid, placed_at, expected_ready)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`
+
+    _, err := database.Exec(query,
+        order.ID,
+        order.CustomerID,
+        order.TailorID,
+        order.MeasurementID,
+        order.FabricChoice,
+        order.StyleDescription,
+        order.Status,
+        order.Price,
+        order.DepositPaid,
+        order.BalancePaid,
+        order.PlacedAt.Format(time.RFC3339),
+        order.ExpectedReady.Format(time.RFC3339),
     )
 
     return err
