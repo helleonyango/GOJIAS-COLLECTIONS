@@ -1,0 +1,11 @@
+# Go binary output
+gojias-main
+
+# Binary directory
+*.db
+
+# Environment files
+.env
+
+# OS generated files
+.DS_Store
